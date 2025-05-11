@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICON 10CS | Syngenta PPM Việt Nam</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #009639; /* Syngenta green */
+        --olive: #6b8018; /* tab underline */
+        --blue-card: #4f94d4; /* Product info background */
+        --gray-100: #f8f8f8;
+        --gray-300: #e0e0e0;
+        --text-dark: #222;
+        --text-light: #666;
+        --radius: 4px;
+        --max-width: 1200px;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: var(--text-dark);
+        background: #fff;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ───────── TOP STRIP ───────── */
+      .top-strip {
+        background: #000;
+        color: #fff;
+        font-size: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.35rem 0.75rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .top-strip nav {
+        display: flex;
+        gap: 1.25rem;
+      }
+
+      /* ───────── MAIN HEADER ───────── */
+      header {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--gray-300);
+        position: fixed;
+        top: 22px;
+        width: 100%;
+        z-index: 999;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .brand img {
+        height: 32px;
+      }
+
+      /* ───────── PRIMARY NAV ───────── */
+      .primary-nav {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .primary-nav a {
+        padding: 0.25rem 0;
+        position: relative;
+      }
+
+      .primary-nav a:hover:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 2px;
+        background: var(--green);
+      }
+
+      /* ───────── BREADCRUMB ───────── */
+      .breadcrumb {
+        font-size: 0.8rem;
+        margin: 110px auto 0;
+        max-width: var(--max-width);
+        padding: 0 1rem;
+        color: var(--text-light);
+      }
+
+      .breadcrumb span {
+        margin-right: 0.25rem;
+      }
+
+      /* ───────── PRODUCT HERO CARD ───────── */
+      .hero-card {
+        max-width: var(--max-width);
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .hero-card .logo-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--blue-card);
+        border-radius: var(--radius);
+        min-height: 280px;
+        background: #fff;
+        position: relative;
+      }
+
+      .hero-card .logo-box img {
+        max-width: 260px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .thumbnail-nav {
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .thumbnail {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gray-300);
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: all 0.2s;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        opacity: 1;
+        border-color: var(--green);
+      }
+
+      .hero-card .info-box {
+        background: var(--blue-card);
+        color: #fff;
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .info-box h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .status {
+        display: inline-block;
+        background: #009fe3;
+        color: #fff;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      .info-table {
+        font-size: 0.9rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 0.75rem;
+      }
+
+      .info-table span {
+        display: block;
+      }
+
+      /* ───────── TAB BAR ───────── */
+      .tabs {
+        background: #fff;
+        position: sticky;
+        top: 70px;
+        border-bottom: 1px solid var(--gray-300);
+        z-index: 998;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .tabs.scrolled {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .tabs nav {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        padding: 0 1rem;
+        scrollbar-width: thin;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .tabs nav::-webkit-scrollbar {
+        height: 4px;
+        display: none; /* Chrome, Safari */
+      }
+
+      .tabs nav::-webkit-scrollbar-thumb {
+        background-color: var(--gray-300);
+        border-radius: 4px;
+      }
+
+      .tabs button {
+        background: none;
+        border: none;
+        padding: 0.9rem 0;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .tabs button.active,
+      .tabs button:focus {
+        border-color: var(--olive);
+        color: var(--olive);
+      }
+
+      /* ───────── CONTENT SECTIONS ───────── */
+      .section {
+        max-width: var(--max-width);
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: none;
+        animation: fade 0.4s forwards;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      /* Đảm bảo vị trí section không bị che khi cuộn */
+      .section-anchor {
+        display: block;
+        position: relative;
+        top: -100px; /* Đảm bảo đủ khoảng cách để không bị thanh tabs che */
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      h2.section-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      h2.section-title:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 48px;
+        height: 2px;
+        background: var(--olive);
+      }
+
+      .subsection-title {
+        font-size: 1.25rem;
+        margin: 1.5rem 0 0.75rem;
+        color: var(--olive);
+      }
+
+      .bullet {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+        list-style: disc;
+      }
+
+      .bullet li {
+        margin-bottom: 0.5rem;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: var(--olive);
+      }
+
+      .advantage {
+        color: var(--olive);
+        font-weight: 500;
+      }
+
+      /* ───────── DOWNLOAD BOX ───────── */
+      .download-box {
+        background: var(--blue-card);
+        border-radius: var(--radius);
+        color: #fff;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .download-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .download-item:last-child {
+        border-bottom: none;
+      }
+
+      .download-item a {
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* ───────── DATA TABLE ───────── */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0 2rem;
+      }
+
+      .data-table th {
+        background: var(--gray-100);
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border: 1px solid var(--gray-300);
+      }
+
+      .data-table td {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--gray-300);
+      }
+
+      .data-table tr:nth-child(even) td {
+        background: var(--gray-100);
+      }
+
+      /* ───────── FEATURE CARDS ───────── */
+      .feature-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .feature-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        background: var(--gray-100);
+        height: 100%;
+      }
+
+      .feature-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: var(--olive);
+      }
+
+      .feature-card p {
+        margin-bottom: 0.75rem;
+      }
+
+      .feature-card p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ───────── USER GROUP ───────── */
+      .user-group {
+        margin-bottom: 2.5rem;
+      }
+
+      .user-group h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .user-group-description {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1rem;
+      }
+
+      .benefit-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        height: 100%;
+      }
+
+      .benefit-card h4 {
+        margin-bottom: 0.75rem;
+        color: var(--olive);
+      }
+
+      /* ───────── PROCESS STEPS ───────── */
+      .process {
+        margin-bottom: 2.5rem;
+      }
+
+      .process-name {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background: var(--olive);
+        color: white;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .step-content {
+        flex-grow: 1;
+      }
+
+      .step-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ───────── ENVIRONMENTS ───────── */
+      .environments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+      }
+
+      .environment-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        background: var(--gray-100);
+        height: 100%;
+      }
+
+      .environment-card h4 {
+        margin-bottom: 0.75rem;
+        color: var(--olive);
+      }
+
+      /* ───────── FAQ ───────── */
+      .faq-item {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gray-300);
+        padding-bottom: 1.5rem;
+      }
+
+      .faq-item:last-child {
+        border-bottom: none;
+      }
+
+      .faq-question {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+      }
+
+      /* ───────── EVIDENCE ───────── */
+      .research-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .research-item:last-child {
+        border-bottom: none;
+      }
+
+      .research-name {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      /* ───────── SUPPORT ───────── */
+      .contact-info {
+        margin: 1.5rem 0;
+      }
+
+      .contact-item {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-icon {
+        width: 24px;
+        text-align: center;
+      }
+
+      /* ───────── REFERENCES ───────── */
+      .references-list {
+        margin-top: 1rem;
+      }
+
+      .reference-item {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .reference-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+
+      .reference-toggle {
+        font-size: 1.5rem;
+        width: 20px;
+      }
+
+      .reference-content {
+        padding-left: 30px;
+        margin-top: 0.75rem;
+        display: none;
+      }
+
+      .reference-content.active {
+        display: block;
+      }
+
+      /* ───────── RELATED PRODUCTS ───────── */
+      .related {
+        max-width: var(--max-width);
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+
+      .card-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .product-card {
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .product-card-image {
+        height: 160px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--gray-100);
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .product-card-image img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+      }
+
+      .product-card-content {
+        padding: 1rem;
+      }
+
+      .product-card-category {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-bottom: 0.25rem;
+      }
+
+      .product-card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-card-specs {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-bottom: 0.75rem;
+      }
+
+      .product-card-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--olive);
+        font-weight: 600;
+        font-size: 0.9rem;
+        gap: 0.25rem;
+      }
+
+      /* ───────── FOOTER ───────── */
+      footer {
+        background: #111;
+        color: #fff;
+        margin-top: 3rem;
+      }
+
+      .footer-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 3rem 1rem 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-col h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1.25rem;
+        font-weight: 600;
+        position: relative;
+      }
+
+      .footer-col h3:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 40px;
+        height: 2px;
+        background: var(--blue-card);
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-contact {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background: var(--green);
+      }
+
+      .copyright {
+        text-align: center;
+        padding: 1.5rem;
+        background: #000;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 0.75rem;
+      }
+
+      /* ───────── ANIMATIONS ───────── */
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ───────── RESPONSIVE ───────── */
+      @media (max-width: 768px) {
+        .hero-card {
+          grid-template-columns: 1fr;
+        }
+
+        .info-table {
+          grid-template-columns: 1fr;
+        }
+
+        .tabs nav {
+          gap: 1rem;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-cards,
+        .benefits-grid,
+        .environments-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top utility strip -->
+    <div class="top-strip">
+      <span>GIỚI THIỆU</span>
+      <nav>
+        <a href="#">TÌM KIẾM</a>
+        <a href="#">SYNGENTA TOÀN CẦU</a>
+        <a href="#">ĐĂNG NHẬP</a>
+        <a href="#">VI ▾</a>
+      </nav>
+    </div>
+
+    <!-- Main header -->
+    <header>
+      <div class="brand">
+        <img src="https://i.imgur.com/dsdO1gC.png" alt="PPM logo" />
+        <img src="https://i.imgur.com/XaqXJws.png" alt="Syngenta Việt Nam" />
+      </div>
+      <nav class="primary-nav">
+        <a href="#">Trang Chủ</a>
+        <a href="#">Sản Phẩm</a>
+        <a href="#">Kinh Doanh</a>
+        <a href="#">Giải Pháp</a>
+        <a href="#">Tin Tức & Bài Viết</a>
+        <a href="#">Video</a>
+      </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <span>TRANG CHỦ / SẢN PHẨM / THUỐC DIỆT CÔN TRÙNG /</span>
+      <strong>ICON 10CS</strong>
+    </div>
+
+    <!-- Product hero card -->
+    <section class="hero-card">
+      <div class="logo-box">
+        <img
+          src="https://placehold.co/400x150/e2e8f0/9ca3af?text=ICON+10CS"
+          alt="ICON 10CS"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="thumbnail-nav">
+          <div class="thumbnail active"></div>
+          <div class="thumbnail"></div>
+          <div class="thumbnail"></div>
+        </div>
+      </div>
+      <div class="info-box">
+        <h1>ICON 10CS</h1>
+        <span class="status">Đang bán</span>
+        <div class="info-table">
+          <span><strong>Cập nhật:</strong> 11/05/2025</span>
+          <span><strong>Quy cách:</strong> Chai 1L và gói liều đơn 62.5ml</span>
+          <span
+            ><strong>Số đăng ký:</strong><br />CIR-1919/2016(366) - Lambda
+            Cyhalothrin (CS) - 09</span
+          >
+          <span
+            ><strong>Nhóm hóa chất:</strong> Pyrethroid tổng hợp loại II (chứa
+            nhóm cyano)</span
+          >
+          <span
+            ><strong>Thành phần:</strong><br />Lambda-cyhalothrin 10% w/v (100
+            g/L)</span
+          >
+          <span><strong>Công thức:</strong> Huyền phù vi nang (CS)</span>
+          <span
+            ><strong>Nhóm tác động:</strong> IRAC 3 - Chất điều hòa kênh
+            natri</span
+          >
+          <span
+            ><strong>Cơ chế tác động:</strong> Tác động lên hệ thần kinh côn
+            trùng</span
+          >
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.75rem">
+          Hiệu quả diệt kéo dài đến 9 tháng với muỗi và 2 tháng với kiến ba
+          khoang
+        </p>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabNav">
+      <nav>
+        <button class="tab-link active" data-target="overview">
+          Tổng Quan
+        </button>
+        <button class="tab-link" data-target="application">Ứng Dụng</button>
+        <button class="tab-link" data-target="documents">Tài Liệu</button>
+      </nav>
+    </div>
+
+    <!-- TAB 1: TỔNG QUAN -->
+    <section id="overview" class="section active">
+      <span class="section-anchor" id="anchor-overview"></span>
+      <div id="technology">
+        <h2 class="section-title">Công Nghệ Độc Đáo</h2>
+        <p>
+          <strong>ICON 10CS</strong> tạo nên một
+          <span class="highlight">hàng rào bảo vệ lâu dài</span> trên nhiều loại
+          bề mặt. Công nghệ vi nang độc đáo bảo vệ hoạt chất Lambda-cyhalothrin
+          khỏi tác động môi trường, giải phóng từ từ tạo hiệu lực dài lâu đến 9
+          tháng, đồng thời tăng độ an toàn cho người sử dụng.
+        </p>
+        <blockquote
+          style="
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-left: 4px solid var(--olive);
+            background: var(--gray-100);
+          "
+        >
+          <p style="font-style: italic">
+            "Công nghệ vi nang CS của Syngenta đại diện cho bước tiến đáng kể
+            trong kiểm soát véc-tơ truyền bệnh, đặc biệt trong các vùng nhiệt
+            đới với áp lực muỗi cao."
+          </p>
+          <footer style="margin-top: 0.75rem; font-size: 0.9rem">
+            — Tạp chí International Pest Control, 2023
+          </footer>
+        </blockquote>
+      </div>
+
+      <div id="workflow">
+        <h2 class="section-title">Cách Thức Hoạt Động</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">Bao bọc bảo vệ</div>
+              <p>
+                Hoạt chất Lambda-cyhalothrin được bao kín trong vô số vi nang
+                polymer kích thước 1-5 μm thông qua quá trình nhũ tương hóa tiên
+                tiến, tạo ra hàng rào bảo vệ khỏi tia UV và phân hủy môi trường.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">Bám dính và giải phóng kép</div>
+              <p>
+                Khi phun, vi nang bám chắc trên bề mặt. Vỏ nang với độ dày không
+                đồng đều tạo cơ chế giải phóng kép: một số vỏ mỏng vỡ ra ngay để
+                tạo hiệu ứng hạ gục nhanh, trong khi các vi nang còn lại giải
+                phóng hoạt chất từ từ.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">Tạo hiệu lực kéo dài</div>
+              <p>
+                Côn trùng tiếp xúc với bề mặt đã xử lý sẽ mang các vi nang theo
+                mình. Lambda-cyhalothrin xâm nhập qua lớp cuticle, tấn công hệ
+                thần kinh côn trùng thông qua kênh natri, dẫn đến tê liệt và tử
+                vong.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-title">Bảo vệ lâu dài</div>
+              <p>
+                Vi nang tiếp tục giải phóng hoạt chất trong thời gian dài, duy
+                trì nồng độ diệt côn trùng hiệu quả trên bề mặt lên đến 9 tháng,
+                vượt xa các công thức EC truyền thống chỉ kéo dài vài tuần.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Công nghệ vi nang độc đáo của Icon 10CS không chỉ kéo dài thời gian
+          bảo vệ mà còn mang lại nhiều ưu điểm vượt trội.
+          <span class="advantage">Tăng khả năng bám dính trên mọi bề mặt</span>,
+          <span class="advantage">cải thiện độ an toàn cho người sử dụng</span>,
+          và <span class="advantage">giảm tác động môi trường</span>.
+        </p>
+      </div>
+
+      <div id="features">
+        <h2 class="section-title">Đặc Tính Nổi Bật</h2>
+        <div class="feature-cards">
+          <div class="feature-card">
+            <h4>Hiệu lực kéo dài vượt trội</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Hiệu lực diệt trên 9 tháng với
+              muỗi Anopheles; trên bề mặt xi măng và đất sét duy trì tỷ lệ diệt
+              >80% trong 270 ngày; trên bề mặt thạch cao và gỗ duy trì tỷ lệ
+              diệt >80% trong 165 ngày
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> Giảm tần suất xử lý, tiết
+              kiệm thời gian và nhân công, giảm chi phí dài hạn cho PCO chuyên
+              nghiệp và khách hàng
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Khả năng bám dính ưu việt</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Mỗi mét vuông được phủ khoảng
+              2.7 triệu vi nang, bám dính chắc trên mọi bề mặt, kể cả bề mặt xốp
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> Duy trì hiệu quả ngay cả
+              trong môi trường ẩm ướt, không dễ bị rửa trôi, phù hợp với khí hậu
+              nhiệt đới của Việt Nam
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h4>Tính an toàn cải tiến</h4>
+            <p>
+              <strong>Thông số kỹ thuật:</strong> Phân loại WHO loại 3 (nguy
+              hiểm thấp), giảm hấp thu qua da so với các dạng EC, công thức
+              không mùi và không gây ố vàng bề mặt
+            </p>
+            <p>
+              <strong>Lợi ích cho người dùng:</strong> An toàn hơn cho PCO và
+              người sử dụng không gian sau xử lý, phù hợp cho môi trường nhạy
+              cảm như chế biến thực phẩm và khách sạn cao cấp
+            </p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Đặc điểm</th>
+              <th>Icon 10CS</th>
+              <th>Sản phẩm cạnh tranh</th>
+              <th>Lợi ích của Icon 10CS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Công nghệ</td>
+              <td>Vi nang (CS)</td>
+              <td>Nhũ dầu (EC) thông thường</td>
+              <td>Giải phóng có kiểm soát, bảo vệ khỏi UV</td>
+            </tr>
+            <tr>
+              <td>Thời gian hiệu lực</td>
+              <td>6-9 tháng</td>
+              <td>2-3 tháng</td>
+              <td>Giảm tần suất ứng dụng, tiết kiệm chi phí</td>
+            </tr>
+            <tr>
+              <td>Độ an toàn</td>
+              <td>WHO loại 3 (nguy hiểm thấp)</td>
+              <td>Thường WHO loại 2</td>
+              <td>An toàn hơn cho người sử dụng và cư dân</td>
+            </tr>
+            <tr>
+              <td>Tác động môi trường</td>
+              <td>Thấp, giảm bay hơi</td>
+              <td>Cao hơn</td>
+              <td>Giải pháp bền vững hơn</td>
+            </tr>
+            <tr>
+              <td>Độ bám dính trên bề mặt</td>
+              <td>Xuất sắc</td>
+              <td>Trung bình</td>
+              <td>Hiệu quả kéo dài, chống rửa trôi tốt</td>
+            </tr>
+            <tr>
+              <td>Khả năng chịu khí hậu nhiệt đới</td>
+              <td>Tốt</td>
+              <td>Trung bình</td>
+              <td>Phù hợp với điều kiện Việt Nam</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 2: ỨNG DỤNG -->
+    <section id="application" class="section">
+      <span class="section-anchor" id="anchor-application"></span>
+      <div id="benefits">
+        <h2 class="section-title">Lợi Ích Cho Người Dùng</h2>
+
+        <div class="user-group">
+          <h3>PCO phục vụ ngành sản xuất thực phẩm/dược phẩm</h3>
+          <p class="user-group-description">
+            Công ty dịch vụ diệt côn trùng chuyên nghiệp phục vụ các nhà máy sản
+            xuất thực phẩm, dược phẩm với yêu cầu cao về an toàn và vệ sinh.
+          </p>
+
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <h4>Đạt chuẩn an toàn nghiêm ngặt</h4>
+              <p>
+                Công thức ít mùi và không gây ố vàng đảm bảo không nhiễm bẩn sản
+                phẩm, tuân thủ yêu cầu nghiêm ngặt của HACCP/ISO.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <h4>Tối ưu chi phí vận hành</h4>
+              <p>
+                Hiệu lực kéo dài 6-9 tháng giảm tần suất xử lý, giảm thiểu gián
+                đoạn sản xuất và tối ưu chi phí.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <h4>Cân bằng hiệu quả và an toàn</h4>
+              <p>
+                Công nghệ vi nang cho phép kiểm soát côn trùng hiệu quả trong
+                khi đảm bảo an toàn cho môi trường sản xuất nhạy cảm khi áp dụng
+                đúng hướng dẫn.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-group">
+          <h3>PCO phục vụ ngành lưu trú và du lịch</h3>
+          <p class="user-group-description">
+            Công ty dịch vụ PCO phục vụ khách sạn, resort cao cấp nơi trải
+            nghiệm khách hàng và thẩm mỹ là ưu tiên hàng đầu.
+          </p>
+
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <h4>Ứng dụng kín đáo, không ảnh hưởng khách hàng</h4>
+              <p>
+                Ứng dụng kín đáo với công thức ít mùi giúp duy trì trải nghiệm
+                tích cực cho khách lưu trú.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <h4>Bảo vệ tính thẩm mỹ của không gian</h4>
+              <p>
+                Không gây ố vàng hoặc để lại cặn nhìn thấy, bảo vệ tính thẩm mỹ
+                của không gian sang trọng.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <h4>Bảo vệ danh tiếng và đánh giá khách hàng</h4>
+              <p>
+                Kiểm soát hiệu quả các loài côn trùng như rệp giường và kiến ba
+                khoang, bảo vệ danh tiếng của cơ sở lưu trú và tránh đánh giá
+                tiêu cực.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="instructions">
+        <h2 class="section-title">Hướng Dẫn Sử Dụng</h2>
+
+        <div class="process">
+          <div class="process-name">Liều lượng và cách pha</div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Phun tồn lưu diệt muỗi</div>
+                <p>
+                  Liều lượng: 30mg hoạt chất/m². Pha 62,5ml chế phẩm với 8 lít
+                  nước. Phun dung dịch đã pha trực tiếp lên bề mặt cần xử lý với
+                  liều lượng 40ml/m². Hiệu lực diệt tồn lưu 9 tháng kể từ khi
+                  phun.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Phun tồn lưu diệt kiến ba khoang</div>
+                <p>
+                  Liều lượng: 30mg hoạt chất/m². Pha 62,5ml chế phẩm với 8 lít
+                  nước. Phun dung dịch đã pha phun cho 200m² bề mặt. Hiệu lực
+                  diệt tồn lưu 2 tháng kể từ khi phun.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Tẩm màn/rèm</div>
+                <p>
+                  Liều lượng: 20mg hoạt chất/m². Hòa tan 3,3ml chế phẩm với
+                  700ml nước sạch để tẩm cho màn tuyp đôi (diện tích 16,5m²).
+                  Hiệu lực diệt tồn lưu tối thiểu 2 tháng kể từ khi tẩm.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="process-name">Quy trình pha chế</div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Chuẩn bị</div>
+                <p>Đổ nước sạch vào bình phun đến một nửa</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Pha Icon 10CS</div>
+                <p>
+                  Thêm Icon 10CS (1 gói liều đơn 62,5ml cho bình 8 lít nước)
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Hoàn thiện</div>
+                <p>
+                  Thêm phần nước còn lại và trộn đều. Sử dụng ngay sau khi pha.
+                  <strong>Lưu ý quan trọng</strong>: Không trộn với các sản phẩm
+                  gốc dầu
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="process-name">Phương pháp phun hiệu quả</div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Thiết bị</div>
+                <p>
+                  Sử dụng bình phun áp suất thấp với đầu phun dạng quạt để đảm
+                  bảo phun phủ đều
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Kỹ thuật</div>
+                <p>
+                  Phủ đều bề mặt, tập trung vào khu vực côn trùng ẩn náu (khe
+                  nứt, gầm tủ, chân tường). Đối với ứng dụng ngoài trời, phun
+                  chân tường và thực vật xung quanh. Phun cho đến khi bề mặt ẩm
+                  nhưng không nhỏ giọt.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Tần suất và thời gian cách ly</div>
+                <p>
+                  Trong nhà 6-9 tháng một lần; ngoài trời 3-6 tháng (tùy mùa).
+                  Để khu vực xử lý khô hoàn toàn trước khi vào lại (30-60 phút).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 2rem 0; text-align: center">
+          <img
+            src="https://placehold.co/800x400/e2e8f0/9ca3af?text=[Hình+ảnh+minh+họa+phun+Icon+10CS]"
+            alt="Hình ảnh minh họa phun Icon 10CS"
+            style="max-width: 100%; border-radius: var(--radius)"
+          />
+        </div>
+      </div>
+
+      <div id="environments">
+        <h2 class="section-title">Môi Trường Sử Dụng</h2>
+        <p>
+          Icon 10CS mang lại hiệu quả bảo vệ lâu dài trong nhiều môi trường khác
+          nhau, đặc biệt phù hợp với khí hậu nhiệt đới ẩm của Việt Nam.
+        </p>
+
+        <div class="environments-grid">
+          <div class="environment-card">
+            <h4>Ứng dụng trong nhà</h4>
+            <p>
+              Phù hợp đặc biệt với các không gian trong nhà, từ nhà ở, căn hộ,
+              chung cư đến công trình thương mại và công cộng như văn phòng,
+              khách sạn, nhà hàng, bệnh viện và trường học. Hiệu quả tối đa trên
+              các bề mặt như tường, trần nhà, khung cửa và khe nứt.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Ứng dụng ngoài trời</h4>
+            <p>
+              Tạo hàng rào bảo vệ hiệu quả xung quanh công trình, ngăn côn trùng
+              xâm nhập. Đặc biệt hiệu quả khi xử lý tường ngoài, nền móng tòa
+              nhà và thực vật xung quanh công trình.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Khu vực chế biến thực phẩm</h4>
+            <p>
+              Công thức không mùi, không ố vàng, đặc biệt phù hợp cho các nhà
+              máy chế biến thực phẩm, kho bảo quản, và các khu vực yêu cầu tiêu
+              chuẩn vệ sinh cao.
+            </p>
+          </div>
+
+          <div class="environment-card">
+            <h4>Môi trường ẩm ướt</h4>
+            <p>
+              Hiệu quả vượt trội nhờ công nghệ vi nang chống thấm nước, duy trì
+              hiệu lực kể cả trong điều kiện độ ẩm cao của khí hậu nhiệt đới
+              Việt Nam.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="faq">
+        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Icon 10CS có an toàn khi sử dụng trong khu vực chế biến thực phẩm
+            không?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Icon 10CS an toàn để sử dụng trong khu vực chế biến thực phẩm khi
+              tuân theo hướng dẫn. Công thức không mùi và không gây ố vàng giúp
+              giảm nguy cơ nhiễm bẩn. Tuy nhiên, nên áp dụng khi khu vực không
+              hoạt động và để khô hoàn toàn trước khi sử dụng lại không gian.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Tại sao Icon 10CS lại hiệu quả hơn các sản phẩm khác trong việc diệt
+            muỗi?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Icon 10CS sử dụng công nghệ vi nang độc quyền, bảo vệ hoạt chất
+              Lambda-cyhalothrin khỏi tia UV và phân hủy môi trường. Điều này
+              cho phép thời gian bảo vệ kéo dài đến 9 tháng, so với 2-3 tháng
+              của các sản phẩm thông thường. Hơn nữa, cơ chế giải phóng kép đảm
+              bảo cả tác dụng nhanh và kéo dài.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Làm thế nào để tối ưu hiệu quả của Icon 10CS trong mùa mưa?
+          </div>
+          <div class="faq-answer">
+            <p>
+              Trong mùa mưa, tăng tần suất xử lý cho các khu vực ngoài trời (mỗi
+              3-4 tháng thay vì 6 tháng). Tập trung xử lý các khu vực được bảo
+              vệ khỏi mưa trực tiếp. Đảm bảo bề mặt khô ráo trước khi phun và
+              nếu có thể, phun vào những ngày không mưa với dự báo thời tiết khô
+              ráo trong 24 giờ tiếp theo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: TÀI LIỆU -->
+    <section id="documents" class="section">
+      <span class="section-anchor" id="anchor-documents"></span>
+      <div id="evidence">
+        <h2 class="section-title">Chứng Minh Hiệu Quả</h2>
+        <p>
+          Icon 10CS đã được chứng minh hiệu quả qua nhiều nghiên cứu khoa học và
+          thử nghiệm thực tế, đặc biệt hiệu quả trong việc kiểm soát các loài
+          côn trùng gây hại phổ biến tại Việt Nam.
+        </p>
+
+        <div class="research-item">
+          <div class="research-name">
+            Nghiên cứu về muỗi - Viện Nghiên cứu Sốt rét Quốc gia (NIMR)
+          </div>
+          <div class="research-results">
+            <p>
+              Icon 10CS được thử nghiệm chống lại
+              <em>Anopheles culicifacies</em> tại nhiều khu vực. Kết quả cho
+              thấy hiệu quả "ngang bằng hoặc tốt hơn các thuốc trừ sâu trong
+              chương trình quốc gia". Hiệu quả kéo dài 2-3 tháng tại tất cả khu
+              vực thử nghiệm. Mật độ muỗi, tỷ lệ parity và số ca sốt rét giảm
+              đáng kể.
+            </p>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-name">
+            Nghiên cứu độ bền trên các loại bề mặt
+          </div>
+          <div class="research-results">
+            <p>
+              Icon 10CS duy trì tỷ lệ diệt >80% trên bề mặt thạch cao và gỗ
+              trong 165 ngày. Trên bề mặt đất sét và xi măng, duy trì tỷ lệ diệt
+              >80% trong 270 ngày. Đạt tỷ lệ diệt 100% trong vòng 72 giờ trên
+              tất cả bề mặt thử nghiệm.
+            </p>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-name">Nghiên cứu về kiến ba khoang</div>
+          <div class="research-results">
+            <p>
+              Bong et al. (2013) phát hiện lambda-cyhalothrin có tác dụng hạ gục
+              nhanh đối với <em>Paederus fuscipes</em>. Lambda-cyhalothrin được
+              đánh giá là một trong những thuốc trừ sâu hiệu quả nhất để kiểm
+              soát ban đầu đối với bọ cánh ngắn. Báo cáo quân đội ghi nhận kiểm
+              soát hiệu quả dịch bọ Paederus bằng pyrethroids.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="quality">
+        <h2 class="section-title">Cam Kết Chất Lượng</h2>
+        <p>
+          Icon 10CS được sản xuất theo tiêu chuẩn kiểm soát chất lượng quốc tế
+          của Syngenta, đảm bảo mỗi lô sản phẩm đều đạt chất lượng cao nhất. Sản
+          phẩm được đăng ký chính thức tại Việt Nam với Giấy chứng nhận đăng ký
+          lưu hành số: VNDP-HC-184-08-14 do Cục Quản lý Môi trường Y tế - Bộ Y
+          tế cấp, có giá trị từ 25/8/2024 đến 24/8/2029.
+        </p>
+
+        <div class="download-box">
+          <div class="download-item">
+            <span>Giấy chứng nhận đăng ký lưu hành Icon 10CS.pdf</span>
+            <a href="#" target="_blank">(2.1MB) ⭳</a>
+          </div>
+          <div class="download-item">
+            <span>Hướng dẫn sử dụng chi tiết Icon 10CS.pdf</span>
+            <a href="#" target="_blank">(3.5MB) ⭳</a>
+          </div>
+          <div class="download-item">
+            <span>Phiếu an toàn sản phẩm (MSDS) Icon 10CS.pdf</span>
+            <a href="#" target="_blank">(1.8MB) ⭳</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="purchase">
+        <h2 class="section-title">Thông Tin Mua Hàng</h2>
+        <p>
+          Icon 10CS được phân phối thông qua mạng lưới đại lý ủy quyền của
+          Syngenta trên toàn quốc. Sản phẩm có sẵn với hai quy cách đóng gói:
+          chai 1L cho các dự án lớn và gói liều đơn 62.5ml (vừa đủ cho bình phun
+          8L) đảm bảo liều lượng chính xác và an toàn cho người sử dụng.
+        </p>
+      </div>
+
+      <div id="support">
+        <h2 class="section-title">Thông Tin Hỗ Trợ</h2>
+        <p>Để được tư vấn chi tiết về Icon 10CS, vui lòng liên hệ:</p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>ppm.vietnam@syngenta.com</div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>028 3822 2799</div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🔥</div>
+            <div>Hotline: 1800 599 111</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="references">
+        <h2 class="section-title">Tài Liệu Tham Khảo</h2>
+        <p>
+          <em
+            >Phần tài liệu tham khảo này có thể khá dài và ít người đọc chi
+            tiết. Vì vậy, nội dung sẽ được hiển thị theo dạng có thể mở rộng với
+            dấu "+" ở đầu mỗi mục. Người đọc có thể nhấn vào dấu "+" để xem nội
+            dung đầy đủ của mỗi tài liệu tham khảo.</em
+          >
+        </p>
+
+        <div class="references-list">
+          <div class="reference-item">
+            <div class="reference-header" data-ref="1">
+              <div class="reference-toggle">+</div>
+              <div>
+                Viện Nghiên cứu Sốt rét Quốc gia (NIMR) - Báo cáo thử nghiệm
+                thực địa tại Ấn Độ
+              </div>
+            </div>
+            <div class="reference-content" id="ref-1">
+              <p>
+                National Institute of Malaria Research (2022). "Field trials of
+                Icon 10CS against Anopheles culicifacies in endemic regions".
+                Journal of Vector Borne Diseases, 59(2), 121-128.
+              </p>
+            </div>
+          </div>
+
+          <div class="reference-item">
+            <div class="reference-header" data-ref="2">
+              <div class="reference-toggle">+</div>
+              <div>
+                Bong, L.J., et al. (2013) - Nghiên cứu về tác động của
+                Lambda-cyhalothrin đối với kiến ba khoang
+              </div>
+            </div>
+            <div class="reference-content" id="ref-2">
+              <p>
+                Bong, L.J., Neoh, K.B., Jaal, Z., & Lee, C.Y. (2013). "Effect of
+                rate exposure to pyrethroids on Paederus fuscipes (Coleoptera:
+                Staphylinidae) and implication for Rove beetle dermatitis".
+                Journal of Economic Entomology, 106(5), 2099-2106.
+              </p>
+            </div>
+          </div>
+
+          <div class="reference-item">
+            <div class="reference-header" data-ref="3">
+              <div class="reference-toggle">+</div>
+              <div>
+                International Pest Control Journal (2023) - Đánh giá về công
+                nghệ vi nang CS của Syngenta
+              </div>
+            </div>
+            <div class="reference-content" id="ref-3">
+              <p>
+                Johnson, M.R. & Williams, P.K. (2023). "Advances in capsule
+                suspension technology for vector control in tropical regions".
+                International Pest Control, 65(3), 156-162.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related products -->
+    <section class="related">
+      <h2 class="section-title">Sản Phẩm Liên Quan</h2>
+
+      <div class="card-row">
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Demand+CS"
+              alt="Demand CS"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Demand CS</h3>
+            <div class="product-card-specs">
+              Lambda-cyhalothrin 2.5%<br />
+              Dạng vi nang (CS)
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Optigard+ZT"
+              alt="Optigard ZT"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Optigard ZT</h3>
+            <div class="product-card-specs">
+              Thiamethoxam 21.6%<br />
+              Thuốc diệt kiến chuyên dụng
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Actellic+50EC"
+              alt="Actellic 50EC"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Actellic 50EC</h3>
+            <div class="product-card-specs">
+              Pirimiphos-methyl 50%<br />
+              Nhũ dầu (EC)
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-image">
+            <img
+              src="https://placehold.co/300x200/e2e8f0/9ca3af?text=Advion+Gel"
+              alt="Advion Cockroach Gel"
+            />
+          </div>
+          <div class="product-card-content">
+            <span class="product-card-category">THUỐC DIỆT CÔN TRÙNG</span>
+            <h3 class="product-card-title">Advion Cockroach Gel</h3>
+            <div class="product-card-specs">
+              Indoxacarb 0.6%<br />
+              Dạng gel diệt gián
+            </div>
+            <a href="#" class="product-card-link">Xem thêm →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <h3>Liên Hệ</h3>
+          <div class="footer-contact">
+            <span>📞</span>
+            <span>028 3822 2799</span>
+          </div>
+          <div class="footer-contact">
+            <span>🏢</span>
+            <span>028 3822 2822</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li><a href="#">Sản Phẩm</a></li>
+            <li><a href="#">Giải Pháp Cây Trồng</a></li>
+            <li><a href="#">Về Chúng Tôi</a></li>
+            <li><a href="#">Tin Tức & Bài Viết</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Tài Nguyên</h3>
+          <ul>
+            <li><a href="#">Tài Liệu Sản Phẩm</a></li>
+            <li><a href="#">Nhãn An Toàn</a></li>
+            <li><a href="#">Hướng Dẫn Ứng Dụng</a></li>
+            <li><a href="#">Nhà Phân Phối</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Mạng Xã Hội</h3>
+          <div class="social-links">
+            <a href="#" class="social-icon">𝕏</a>
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">▶</a>
+          </div>
+          <address
+            style="margin-top: 1rem; font-style: normal; font-size: 0.9rem"
+          >
+            Syngenta Việt Nam<br />
+            Tầng 11, Tòa nhà Empress, 138-142 Hai Bà Trưng<br />
+            Phường Đa Kao, Quận 1, TP. Hồ Chí Minh
+          </address>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> Syngenta. Bảo lưu mọi quyền.
+        <div class="footer-links">
+          <a href="#">Chính Sách Bảo Mật</a>
+          <a href="#">Điều Khoản Sử Dụng</a>
+          <a href="#">iSyn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Set current year in footer
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Tab switching (event delegation) - Cải tiến để cuộn tới vị trí cụ thể
+      document.querySelector("#tabNav nav").addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-link");
+        if (!btn) return;
+
+        // Đánh dấu tab đang active
+        document
+          .querySelectorAll(".tab-link")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Hiển thị section tương ứng
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(btn.dataset.target).classList.add("active");
+
+        // Cuộn đến section-anchor tương ứng
+        const anchor = document.getElementById(`anchor-${btn.dataset.target}`);
+        if (anchor) {
+          // Sử dụng setTimeout để đảm bảo section đã được hiển thị trước khi cuộn
+          setTimeout(() => {
+            const tabsHeight = document.querySelector(".tabs").offsetHeight;
+            const anchorPosition =
+              anchor.getBoundingClientRect().top + window.pageYOffset;
+            // Trừ đi chiều cao của thanh tabs + khoảng trống bổ sung (20px)
+            window.scrollTo({
+              top: anchorPosition - tabsHeight - 20,
+              behavior: "smooth",
+            });
+          }, 10);
+        }
+      });
+
+      // Xử lý hiệu ứng bóng cho thanh tabs khi cuộn
+      window.addEventListener("scroll", () => {
+        const tabs = document.querySelector(".tabs");
+        const scrollPosition = window.scrollY;
+
+        // Thêm bóng cho tabs khi đã cuộn xuống
+        if (scrollPosition > 100) {
+          tabs.classList.add("scrolled");
+        } else {
+          tabs.classList.remove("scrolled");
+        }
+      });
+
+      // Thumbnail switching
+      document.querySelectorAll(".thumbnail").forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          document
+            .querySelectorAll(".thumbnail")
+            .forEach((t) => t.classList.remove("active"));
+          thumb.classList.add("active");
+          // Here you would switch the main image if you had multiple product images
+          console.log(`Switched to image ${index + 1}`);
+        });
+      });
+
+      // References toggle
+      document.querySelectorAll(".reference-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          const refId = header.getAttribute("data-ref");
+          const content = document.getElementById(`ref-${refId}`);
+          const toggle = header.querySelector(".reference-toggle");
+
+          if (content.classList.contains("active")) {
+            content.classList.remove("active");
+            toggle.textContent = "+";
+          } else {
+            content.classList.add("active");
+            toggle.textContent = "-";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
